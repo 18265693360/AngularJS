@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--页面加载防抖应用闪烁-->
+<!--ng-cloak-->
+<div ng-app="">
+    <p ng-cloak>
+        {{5+5}}
+    </p>
+</div>
+</body>
+<script>
+    /*
+    *    ng-cloak
+    *    指令用于在AngularJS应用在加载时防止AngularJS代码未加载完而出现的问题
+    *    AngularJS应用在加载时 文档可能会由于AngularJS代码未加载完成而出现AnguarJS代码，
+    *    进而会有闪烁的效果
+    *
+    *    ng-cloak指令是为了防止该问题的产生
+    *
+    *    语法
+    *    <element ng-cloak></element>
+    * */
+</script>
+</html>
