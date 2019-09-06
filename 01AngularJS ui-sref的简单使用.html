@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a ui-serf="man">男人</a>
+<!--这是一个非常简单的ui-sref的使用，
+当JavaScript重新生成网页时，
+它会查找$state中名为“man”的state，
+读取这个state的url，
+然后在a标签里生成href="url" rel="external nofollow" ，-->
+<!--结果为： <a ui-sref="man" href="#/man.html" rel="external nofollow" >男人</a>-->
+
+<!--在html中使用repeat-->
+<li ng-repeat="item in items">
+    <a ui-sref="{{item.statePage}}"><{{item.state}}></a>
+</li>
+<!--ui-sref不支持动态绑定，这样的代码会报错。sref中你只能使用state名，顶多加点参数。-->
+<!--这样的话，你只能放弃sref，用回href绑定，你可以用$state.href来读取state的url。-->
+
+<!--下面简单介绍下ui-sref参数的传递-->
+<a ui-sref="man({id:1,name:2})">按钮</a>
+
+</body>
+<script>
+    // 但如果，你在创建一个导航控制器，里面有一个导航item的数组：
+    $scope.item = [
+        {state: "man", statePage:"man.html"},
+        {state: "womanMe", statePage: "woman.html"}
+    ]
+
+    // 路由配置
+    $stateProvider.state('man',{
+        url:'/man.html?id&name', //参数必须里面声明
+        templateUrl:'../man.html',
+    })
+    //点击连接后，浏览器的地址则变为：/man.html/id=1&name=2
+    // 或者也可以这样
+    $stateProvider.state('man',{
+        url:'/man.html',
+        templateUrl:'../man.html',
+        params:{'id': null, 'name':null},//参数在这里声明git
+    })
+    //然后在对应的controller里面通过$stateParams取值：
+    // $stateParams.id,$stateParams.name
+    //其实ui-sref和$state.go本质上是一个东西，可以还看ui-sref的源码
+    element.bind('click',function (e) {
+        var button = e.which || e.button;
+        if (!(button > 1 || e.ctrlKey || e.metaKey || element.attr('target'))){
+            var transition = $timeout(function(){
+                var transition = $titmeout(function () {
+                    //HERE we call $state.go inside of ui-sref
+                    $state.go(ref.state, params, options);
+                })
+            })
+        }
+    })
+</script>
+</html>
